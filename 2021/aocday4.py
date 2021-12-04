@@ -30,15 +30,15 @@ def display_boards(bingo_boards):
 
 def check_board(bingo_board):
     columns = []
-    for row in bingo_board:
+    for n, row in enumerate(bingo_board):
         played_numbers_row = [block[1] for block in row]
         if all(played_numbers_row):
             return True
         for i, block in enumerate(row):
-            try:
-                columns[i].append(block[1])
-            except IndexError:
+            if n == 0:
                 columns.append([block[1]])
+            else:
+                columns[i].append(block[1])
 
     for column in columns:
         if all(column):
@@ -110,10 +110,10 @@ def play_bingo_last_wins():
 def play_bingo_last_wins_alt(bingo_boards, puzzle_numbers, nth):
     win_order = []
     for b, bingo_board in enumerate(bingo_boards):
-        for n, number in enumerate(puzzle_numbers[nth:]):
+        for n, number in enumerate(puzzle_numbers[nth:], nth):
             if mark_board(bingo_board, number):
                 # (board_index, index of last played number, last_played number)
-                win_order.append((b, n + nth, number))
+                win_order.append((b, n, number))
                 break
 
     get_last_winner(bingo_boards, win_order)

@@ -19,15 +19,15 @@ def create_bingo_boards(filename):
 
 def check_board(bingo_board):
     columns = []
-    for row in bingo_board:
+    for n, row in enumerate(bingo_board):
         played_numbers_row = [block[1] for block in row]
         if all(played_numbers_row):
             return True
         for i, block in enumerate(row):
-            try:
-                columns[i].append(block[1])
-            except IndexError:
+            if n == 0:
                 columns.append([block[1]])
+            else:
+                columns[i].append(block[1])
 
     for column in columns:
         if all(column):

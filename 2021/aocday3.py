@@ -4,17 +4,17 @@ def avg(lst):
 
 def process_input(filename, part2=False):
     input_lst = []
-    for row in open(filename):
+    for n, row in enumerate(open(filename)):
         binary_string = row.strip("\n")
 
         if part2:
             input_lst.append(binary_string)
         else:
             for i in range(0, len(binary_string)):
-                try:
-                    input_lst[i].append(int(binary_string[i]))
-                except IndexError:
+                if n == 0:
                     input_lst.append([int(binary_string[i])])
+                else:
+                    input_lst[i].append(int(binary_string[i]))
 
     return input_lst
 
@@ -61,5 +61,3 @@ if __name__ == '__main__':
 
     part2_processed_input = process_input(inputfile, part2=True)
     aoc32(part2_processed_input)
-
-    right = 6124992
