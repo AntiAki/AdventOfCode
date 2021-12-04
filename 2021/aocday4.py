@@ -92,7 +92,7 @@ def play_bingo():
 
 
 # Creates new boards and starts finding the nth puzzle number for each board
-# After all boards have won
+# After all boards have won sort by winning order etc.
 def play_bingo_last_wins():
     bingo_boards, puzzle_numbers = create_bingo_boards("inputs/adventofcode4.txt")
     win_order = []

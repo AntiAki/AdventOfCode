@@ -59,7 +59,7 @@ def get_winner(bingo_boards, win_order, last=False):
 
 
 # Creates boards and starts finding the nth puzzle number for each board
-# After all boards have won
+# After all boards have won sort by winning order etc.
 def play_bingo():
     bingo_boards, puzzle_numbers = create_bingo_boards("inputs/adventofcode4.txt")
     win_order = []
