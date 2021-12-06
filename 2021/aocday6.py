@@ -16,7 +16,7 @@ def initialize_fish():
 
 def count_fish(counts):
     new_counts = defaultdict(int)
-    for i in sorted([int(key) for key in counts.keys()]):
+    for i in [int(key) for key in counts.keys()]:
         dict_key = str(i)
         if i == 0:
             new_counts[CONFIG["birth"]] = counts[dict_key]
