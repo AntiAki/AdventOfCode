@@ -1,4 +1,6 @@
 from collections import defaultdict, Counter
+from math import ceil, floor
+from statistics import mean, median
 from time import perf_counter
 
 
@@ -24,11 +26,11 @@ def dynamic():
     fuel_min = 0
     for i in range(min(numbers), max(numbers)):
         fuel = 0
-        for key, item in horizontal_position_counts.items():
+        for h_pos, count in horizontal_position_counts.items():
             if i == 0:
-                fuel_min += consumption_lookup[abs(i - key)] * item
+                fuel_min += consumption_lookup[abs(i - h_pos)] * count
             else:
-                fuel += consumption_lookup[abs(i - key)] * item
+                fuel += consumption_lookup[abs(i - h_pos)] * count
                 if fuel > fuel_min:
                     break
         if fuel < fuel_min and i != 0:
@@ -36,7 +38,26 @@ def dynamic():
     print(fuel_min)
 
 
+def part_1_median():
+    numbers = [int(num) for num in open("inputs/adventofcode7.txt").readline().split(",")]
+    num_median = int(median(numbers))
+    print(sum([abs(num - num_median) for num in numbers]))
+
+
+# Thanks, Luca
+def part_2_mean():
+    numbers = [int(num) for num in open("inputs/adventofcode7.txt").readline().split(",")]
+    num_mean = mean(numbers)
+    ceil_sum = sum([sum([i for i in range(0, abs(ceil(num_mean) - num) + 1)]) for num in numbers])
+    floor_sum = sum([sum([i for i in range(0, abs(floor(num_mean) - num) + 1)]) for num in numbers])
+    print(min([ceil_sum, floor_sum]))
+
+
 if __name__ == '__main__':
+    part_1_median()
+    t = perf_counter()
+    part_2_mean()  # Maths
+    print(perf_counter() - t)
     t = perf_counter()
     dynamic()
     print(perf_counter() - t)
