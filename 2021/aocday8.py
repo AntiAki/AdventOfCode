@@ -35,19 +35,19 @@ def decoder(ipt, output):
             dt[8] = segments
         set_segments.remove(segments)
 
-    while len(dt.keys()) != 9:
+    while len(dt) != 9:
         for segments in set_segments:
-            if len(segments) == 6 and len(dt.keys()) <= 6:
+            if len(segments) == 6 and len(dt) <= 6:
                 difference = segments.symmetric_difference(dt[8])
                 if difference.issubset(dt[1]):
                     dt[6] = segments
                 elif difference.issubset(dt[4]) and not difference.issubset(dt[7]):
                     dt[0] = segments
-                elif len(dt.keys()) == 6:
+                elif len(dt) == 6:
                     dt[9] = segments
 
-            if len(segments) == 5 and len(dt.keys()) > 6:
-                if len(dt.keys()) == 7:
+            if len(segments) == 5 and len(dt) > 6:
+                if len(dt) == 7:
                     dt[5] = dt[6].intersection(dt[9])
                 elif segments.issubset(dt[9]) and segments != dt[5]:
                     dt[3] = segments
