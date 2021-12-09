@@ -7,7 +7,6 @@ def process_input_file():
         row = [int(val) for val in line.rstrip("\n")]
         array.append(row)
 
-    # show_array(array)
     find_low_points(array)
 
 
@@ -55,7 +54,6 @@ def find_basin_size(array, higher, basin_points):
     len_array = len(array)
     len_row = len(array[0])
     new_higher = []
-    new_basin_points = basin_points
     for high in higher:
         y = high[1][0]
         x = high[1][1]
@@ -64,7 +62,7 @@ def find_basin_size(array, higher, basin_points):
         low_point, up = is_low_point(point, frame)
         new_higher.extend([high for high in up if high[0] < 9])
         s = [high[1] for high in new_higher if high[0] < 9]
-        new_basin_points = basin_points.extend(s)
+        basin_points.extend(s)
 
     if new_higher:
         find_basin_size(array, new_higher, basin_points)
@@ -102,4 +100,4 @@ def find_low_points(array):
 if __name__ == '__main__':
     t = perf_counter()
     process_input_file()
-    print(perf_counter()-t)
+    print(perf_counter() - t)
