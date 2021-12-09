@@ -60,7 +60,7 @@ def find_basin_size(array, higher, basin_points):
         frame = create_frame(array, len_array, len_row, x, y)
         point = array[y][x]
         low_point, up = is_low_point(point, frame)
-        new_higher.extend([high for high in up if high[0] < 9])
+        new_higher.extend([high for high in up if high[0] < 9 and high[1] not in basin_points])
         s = [high[1] for high in new_higher if high[0] < 9]
         basin_points.extend(s)
 
